@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>HERC - UMG</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">HERC - UMG</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Opciones</div>
+                            <a class="nav-link" href="marcaje.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Marcajes
+                            </a>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Usuarios
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="usuario.html">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                        Usuarios
+                                    </a>
+                                    <a class="nav-link" href="registro.html">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                        Registrar Usuario
+                                    </a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-bars"></i></div>
+                                Salir
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Desarrollado por:</div>
+                        Humberto Rucal <br> 9941-20-3467
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Registro de marcajes</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Entradas y salidas</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select class="form-control" name="Usuario" id="ddlUsuario">
+                                        <option value="">Cargando usuarios...</option> <!-- Placeholder mientras se cargan los usuarios -->
+                                    </select>
+                                    <label for="ddlUsuario">Seleccione un Usuario</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select class="form-control" name="Tiempo" id="ddlTiempo">
+                                        <option value=""></option>
+                                        <option value="1">En tiempo</option>
+                                        <option value="0">Fuera de tiempo</option>
+                                    </select>
+                                    <label for="ddlTiempo">Llegada en tiempo:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select class="form-control" name="RangoFecha" id="ddlFechas">
+                                        <option value=""></option>
+                                        <option value="hoy">Hoy</option>
+                                        <option value="ayer">Ayer</option>
+                                        <option value="estaSemana">Esta Semana</option>
+                                        <option value="semanaPasada">Semana pasada</option>
+                                        <option value="esteMes">Este mes</option>
+                                        <option value="mesPasado">Mes Pasado</option>
+                                        <option value="personalizado">Personalizado</option>
+                                    </select>
+                                    <label for="ddlFechas">Rango de tiempo:</label>
+                                </div>                            
+                            </div>
+                            <div class="col-xl-3 col-md-6" id="personalizadoInputsInicio" style="display: none;">
+                                <div class="form-floating mb-3">
+                                    <input type="date" id="fechaInicio" class="form-control mb-2" />
+                                    <label for="fechaInicio">Fecha inicio:</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6" id="personalizadoInputsFin" style="display: none;">
+                                <div class="form-floating mb-3">
+                                    <input type="date" id="fechaFin" class="form-control mb-2" />
+                                    <label for="fechaFin">Fecha fin:</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="form-floating mb-3">
+                                    <a class="btn btn-primary" id="btnBuscar">Buscar</a>
+                                    <a class="btn btn-primary" id="btnImprimir">Exportar a PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Registro de entradas y salidas
+                            </div>
+                            <div class="card-body text-center">
+                                <div id="contentToExport">
+                                    <table id="datatablesSimple" class="table table-striped table-bordered table-hover">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Usuario</th>
+                                                <th scope="col">Fecha Entrada</th>
+                                                <th scope="col">Fecha Salida</th>
+                                                <th scope="col">En tiempo</th>
+                                                <th scope="col">Observación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Aquí se insertarán los datos obtenidos de la API -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; HERC - UMG 2024</div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
+
+        <script>
+                document.getElementById('btnImprimir').addEventListener('click', function () {
+                    const element = document.getElementById('contentToExport');
+                    const ddlUsuario = document.getElementById("ddlUsuario");
+                    const ddlTiempo = document.getElementById("ddlTiempo");
+                    const select = document.getElementById('ddlFechas');
+                    const fechaActual = new Date();
+                    const opciones = {
+                        timeZone: 'America/Guatemala', // Zona horaria para Guatemala
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false // Para formato de 24 horas
+                    };
+                    const fechaFormateada = new Intl.DateTimeFormat('es-GT', opciones).format(fechaActual);
+                    let Fechas = obtenerRangoFechas();
+                    parametros = `${ddlUsuario.value != '' ? 'Usuario: '+ddlUsuario.options[ddlUsuario.selectedIndex].text +'<br>':''}`;
+                    parametros += `${ddlTiempo.value != '' ? 'Tiempo: '+ddlTiempo.options[ddlTiempo.selectedIndex].text+'<br>':''}`;
+                    parametros += `${select.value != '' ? 'Rango de tiempo: ' + Fechas[0] + ' a ' + Fechas[1] + '<br>':''}`;
+                    const contenidoAdicional = `  <h2 style="text-align: center;">Reporte de marcajes</h2>
+                                                <p style="text-align: center;">Generado: <span>${fechaFormateada}</span></p>
+                                                <div style="margin-bottom: 10px; text-align: center;">
+                                                    ${parametros != '' ? 'Parámetros de búsqueda:<br>':''}
+                                                    ${parametros != '' ? parametros : ''}
+                                                </div>`;
+                    const options = {
+                        margin: 0.1,
+                        filename: 'marcajes.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+                    };
+
+                    html2pdf().from(contenidoAdicional + element.innerHTML).set(options).save();
+                });
+
+
+                function BuscarMarcajes(codigoUsuario, EnTiempo, FechaInicio, FechaFin) {
+                    const tablaBody = document.querySelector("#datatablesSimple tbody");
+
+                    parametros = '';
+                    if(codigoUsuario != ''){
+                        parametros += (parametros.trim() == '' ? '?': '&');
+                        parametros += 'codigousuario=' + codigoUsuario;
+                    }
+                    if(EnTiempo != ''){
+                        parametros += (parametros.trim() == '' ? '?': '&');
+                        parametros += 'EnTiempo=' + EnTiempo;
+                    }
+                    if(FechaInicio != '' && FechaFin != ''){
+                        parametros += (parametros.trim() == '' ? '?': '&');
+                        parametros += 'FechaInicio=' + FechaInicio;
+                        parametros += '&FechaFin=' + FechaFin;
+                    }
+                    // URL de la API (cámbiala según sea necesario)
+                    const apiUrl = 'http://127.0.0.1:8000/obtener_marcajes/'+parametros; // Cambiar por la URL de tu API
+
+                    // Función para cargar los marcajes desde la API
+                    async function cargarMarcajes() {
+                        try {
+                            const response = await fetch(apiUrl);
+                            if (!response.ok) {
+                                throw new Error('Error al obtener los marcajes');
+                            }
+
+                            const data = await response.json(); // Parsear la respuesta JSON
+
+                            // Verificar si hay marcajes en la respuesta
+                            if (data.Marcaje && data.Marcaje.length > 0) {
+                                // Limpiar el tbody de la tabla antes de agregar nuevas filas
+                                tablaBody.innerHTML = '';
+
+                                // Iterar sobre cada marcaje y agregar una fila a la tabla
+                                data.Marcaje.forEach((marcaje, index) => {
+                                    const fila = document.createElement("tr");
+
+                                    // Crear las celdas de la fila y asignar los valores del objeto de la API
+                                    fila.innerHTML = `
+                                                <td>${marcaje.CodigoMarcaje}</td>
+                                                <td>${marcaje.Usuario}</td>
+                                                <td>${marcaje.FechaEntrada}</td>
+                                                <td>${marcaje.FechaSalida}</td>
+                                                <td>${marcaje.EnTiempo == 1 ? "En tiempo" : "Fuera de tiempo"}</td>
+                                                <td>${marcaje.Observacion}</td>
+                                    `;
+
+                                    // Agregar la fila al cuerpo de la tabla
+                                    tablaBody.appendChild(fila);
+                                });
+                            } else {
+                                // Si no hay marcajes disponibles
+                                tablaBody.innerHTML = '<tr><td colspan="6">No hay marcajes disponibles</td></tr>';
+                            }
+
+                        } catch (error) {
+                            console.error('Hubo un problema al cargar los marcajes:', error);
+                            tablaBody.innerHTML = '<tr><td colspan="6">Error al cargar los marcajes</td></tr>';
+                        }
+                    }
+
+                    // Llamar a la función para cargar los marcajes cuando la página se carga
+                    cargarMarcajes();
+                }
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const ddlUsuario = document.getElementById("ddlUsuario");
+        
+                // Reemplaza la URL con la de tu API
+                const apiUrl = 'http://127.0.0.1:8000/obtener_usuarios/'; // Ejemplo de URL de la API
+        
+                // Función para cargar los usuarios desde la API
+                async function cargarUsuarios() {
+                    try {
+                        const response = await fetch(apiUrl);
+                        if (!response.ok) {
+                            throw new Error('Error al obtener los usuarios');
+                        }
+        
+                        const data = await response.json(); // Parsear la respuesta JSON
+        
+                        // Verificar si hay usuarios en la respuesta
+                        if (data.Usuario && data.Usuario.length > 0) {
+                            // Limpiar el DDL antes de agregar las opciones
+                            ddlUsuario.innerHTML = '<option value=""></option>';
+        
+                            // Agregar las opciones obtenidas de la API
+                            data.Usuario.forEach(usuario => {
+                                const option = document.createElement("option");
+                                option.value = usuario.codigoUsuario; // Asignar 'codigoUsuario' como el valor de la opción
+                                option.textContent = usuario.nombre; // Asignar 'nombre' como el texto visible
+                                ddlUsuario.appendChild(option);
+                            });
+                        } else {
+                            // Si no hay usuarios disponibles
+                            ddlUsuario.innerHTML = '<option value=""></option>';
+                        }
+        
+                    } catch (error) {
+                        console.error('Hubo un problema al cargar los usuarios:', error);
+                        ddlUsuario.innerHTML = '<option value="">Error al cargar usuarios</option>';
+                    }
+                }
+        
+                // Llamar a la función para cargar los usuarios al cargar la página
+                cargarUsuarios();
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                BuscarMarcajes('', '', '', '');
+            });
+
+                document.getElementById('ddlFechas').addEventListener('change', obtenerRangoFechas);
+
+                function obtenerRangoFechas() {
+                    const select = document.getElementById('ddlFechas');
+                    const opcion = select.value;
+                    const hoy = new Date();
+                    let inicio = '', fin = '';
+
+                    // Ocultar y limpiar los inputs personalizados si se selecciona una opción distinta
+                    if (opcion !== 'personalizado') {
+                        ocultarYLimpiarPersonalizado();
+                    }
+
+                    switch (opcion) {
+                        case 'hoy':
+                            inicio = fin = formatearFecha(hoy);
+                            break;
+
+                        case 'ayer':
+                            const ayer = new Date(hoy);
+                            ayer.setDate(hoy.getDate() - 1);
+                            inicio = fin = formatearFecha(ayer);
+                            break;
+
+                        case 'estaSemana':
+                            const lunes = new Date(hoy);
+                            lunes.setDate(hoy.getDate() - hoy.getDay() + 1); // Lunes actual
+                            inicio = formatearFecha(lunes);
+                            fin = formatearFecha(hoy);
+                            break;
+
+                        case 'semanaPasada':
+                            const lunesPasado = new Date(hoy);
+                            lunesPasado.setDate(hoy.getDate() - hoy.getDay() - 7); // Lunes de la semana pasada
+                            const domingoPasado = new Date(lunesPasado);
+                            domingoPasado.setDate(lunesPasado.getDate() + 6); // Domingo de la semana pasada
+                            inicio = formatearFecha(lunesPasado);
+                            fin = formatearFecha(domingoPasado);
+                            break;
+
+                        case 'esteMes':
+                            inicio = `${hoy.getFullYear()}-${(hoy.getMonth() + 1).toString().padStart(2, '0')}-01`;
+                            fin = formatearFecha(hoy);
+                            break;
+
+                        case 'mesPasado':
+                            const mesPasado = new Date(hoy);
+                            mesPasado.setMonth(hoy.getMonth() - 1);
+                            inicio = `${mesPasado.getFullYear()}-${(mesPasado.getMonth() + 1).toString().padStart(2, '0')}-01`;
+                            fin = `${mesPasado.getFullYear()}-${(mesPasado.getMonth() + 1).toString().padStart(2, '0')}-${diasEnMes(mesPasado.getFullYear(), mesPasado.getMonth() + 1)}`;
+                            break;
+
+                        case 'personalizado':
+                            document.getElementById('personalizadoInputsInicio').style.display = 'block';
+                            document.getElementById('personalizadoInputsFin').style.display = 'block';
+                            inicio = document.getElementById('fechaInicio').value || '';
+                            fin = document.getElementById('fechaFin').value || '';
+                    }
+
+                    return [inicio, fin];
+                }
+
+                function ocultarYLimpiarPersonalizado() {
+                    const personalizadoInputsInicio = document.getElementById('personalizadoInputsInicio');
+                    const personalizadoInputsFin = document.getElementById('personalizadoInputsFin');
+                    const fechaInicio = document.getElementById('fechaInicio');
+                    const fechaFin = document.getElementById('fechaFin');
+
+                    // Ocultar los inputs y limpiar los valores
+                    personalizadoInputsInicio.style.display = 'none';
+                    personalizadoInputsFin.style.display = 'none';
+                    fechaInicio.value = '';
+                    fechaFin.value = '';
+                }
+
+                function formatearFecha(fecha) {
+                    return fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+                }
+
+                function diasEnMes(anio, mes) {
+                    return new Date(anio, mes, 0).getDate(); // Último día del mes
+                }
+
+                const btnBuscar = document.getElementById('btnBuscar');
+
+                // Se busca en base a los filtros
+                btnBuscar.addEventListener('click', () => {
+                    const ddlUsuario = document.getElementById("ddlUsuario");
+                    const ddlTiempo = document.getElementById("ddlTiempo");
+                    let Fecha = obtenerRangoFechas();
+                    BuscarMarcajes(ddlUsuario.value, ddlTiempo.value, Fecha[0], Fecha[1]);
+                });
+
+        </script>
+
+        
+        
+    </body>
+</html>
